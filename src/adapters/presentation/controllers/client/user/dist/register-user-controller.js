@@ -40,27 +40,43 @@ exports.RegisterUserController = void 0;
 var missing_param_error_1 = require("../../errors/missing-param-error");
 var http_helper_1 = require("../../helpers/http-helper");
 var RegisterUserController = /** @class */ (function () {
-    function RegisterUserController() {
-        this.registerUser = "registerUser";
-        this.sendEmailToUser = "sendEmailToUser";
+    function RegisterUserController(registerUser, sendEmailToUser) {
+        this.registerUser = registerUser;
+        this.sendEmailToUser = sendEmailToUser;
     }
     RegisterUserController.prototype.handle = function (httpRequest) {
         return __awaiter(this, void 0, Promise, function () {
-            var field, _a, username, password, userData;
+            var field, _a, username, password, userData, registerUserResponse, sendEmailResponse, err_1;
             return __generator(this, function (_b) {
-                try {
-                    if (!httpRequest.body.username || !httpRequest.body.password) {
-                        field = !httpRequest.body.name ? 'username' : 'password';
-                        return [2 /*return*/, http_helper_1.badRequest(new missing_param_error_1.MissingParamError(field))];
-                    }
-                    _a = httpRequest.body, username = _a.username, password = _a.password;
-                    userData = { username: username, password: password };
-                    return [2 /*return*/, http_helper_1.ok(userData)];
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 3, , 4]);
+                        if (!httpRequest.body.username || !httpRequest.body.password) {
+                            field = !httpRequest.body.name ? 'username' : 'password';
+                            return [2 /*return*/, http_helper_1.badRequest(new missing_param_error_1.MissingParamError(field))];
+                        }
+                        _a = httpRequest.body, username = _a.username, password = _a.password;
+                        userData = { username: username, password: password };
+                        return [4 /*yield*/, this.registerUser.registerUserOnMailingList(userData)];
+                    case 1:
+                        registerUserResponse = _b.sent();
+                        if (registerUserResponse.isLeft()) {
+                            return [2 /*return*/, http_helper_1.badRequest(registerUserResponse.value)];
+                        }
+                        this.registerUser.registerUserOnMailingList(userData);
+                        return [4 /*yield*/, this.sendEmailToUser.sendEmailToUserWithBonus(userData)];
+                    case 2:
+                        sendEmailResponse = _b.sent();
+                        if (sendEmailResponse.isLeft()) {
+                            return [2 /*return*/, http_helper_1.serverError(sendEmailResponse.value.message)];
+                        }
+                        return [2 /*return*/, http_helper_1.ok(userData)];
+                    case 3:
+                        err_1 = _b.sent();
+                        console.log(err_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
-                catch (err) {
-                    console.log(err);
-                }
-                return [2 /*return*/];
             });
         });
     };

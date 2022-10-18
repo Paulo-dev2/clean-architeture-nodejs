@@ -1,8 +1,8 @@
-import { UserData } from '../../entities/user/user-data'
+import { UserData } from '../../entities/client/user/user-data'
 
 export interface UserRepository {
-  findAllUsers: () => Promise<UserData[]>
-  findUserByEmail: (email: string) => Promise<UserData>
+  findAllUsers: () => Promise<any> // Promise<UserData[]> 
+  findUserByUsername: (username: string) => Promise<any> // Promise<UserData>
   add: (user: UserData) => Promise<void>
-  exists: (email: string) => Promise<boolean>
+  exists: (username: string) => Promise<boolean>
 }
