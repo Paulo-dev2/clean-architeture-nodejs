@@ -1,8 +1,8 @@
-import { DomainError } from "./domain-error"
+import { DomainError } from "@/entities/validations/errors/domain-error"
 
 export class InvalidEmailError extends Error implements DomainError {
-  constructor (username: string) {
-    super(`The email "${username}" is invalid.`)
+  constructor (email: string) {
+    super(`The email "${email}" is invalid.`)
     this.name = 'InvalidEmailError'
   }
 }

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { HttpRequest } from '../../adapters/presentation/controllers/ports/http';
+import { HttpRequest } from '@/adapters/presentation/ports/http';
  
 export class adaptRoute {
   static create (controller: any){

@@ -1,5 +1,5 @@
-import { Either, left, right } from '../../shared/either'
-import { InvalidUsernameError } from './errors/invalid-username'
+import { Either, left, right } from '@/shared/either'
+import { InvalidUsernameError } from '@/entities/validations/errors/invalid-username'
 
 export class UserName {
   private readonly username: string

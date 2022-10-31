@@ -1,4 +1,4 @@
-import { EmailOptions } from '../../usecases/ports/email-service'
+import { EmailOptions } from '@/usecases/ports/email-service'
 import "dotenv/config";
 
 const attachments = [{
@@ -7,7 +7,7 @@ const attachments = [{
 }]
 
 export function getEmailOptions (): EmailOptions {
-  const from = 'Otávio Lemos | theWiseDev <otaviolemos@thewisedev.com.br>'
+  const from = 'Trilhando-se | Edim <trilhando-se@gmail.com>'
   const to = ''
   const mailOptions: EmailOptions = {
     host: process.env.MAIL_TRAP_HOST,

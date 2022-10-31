@@ -2,12 +2,12 @@ import express from 'express';
 import path from 'path';
 import "dotenv/config";
 
-import { MongoHelper } from '../../external/repositories/mongodb/helpers/mongo-helper';
-import { bodyParser, cors, contentType } from '../middleware'
+import { MongoHelper } from '@/external/repositories/mongodb/helpers/mongo-helper';
+import { bodyParser, cors, contentType } from '@/main/middleware'
 
 /* Routes */
-import { routeAdmin } from '../routes/admin';
-import { routeCient } from '../routes/users';
+import { routeAdmin } from '@/main/routes/admin';
+import { routeClient } from '@/main/routes/users';
 
 class App{
     public server;
@@ -25,7 +25,7 @@ class App{
     }
 
     private routes() {
-        this.server.use("/client",routeCient);
+        this.server.use("/client",routeClient);
         this.server.use("/admin",routeAdmin);
         this.server.use("/files",express.static(path.resolve(__dirname,"..","temp","uploads","user"))
         );

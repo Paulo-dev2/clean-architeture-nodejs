@@ -1,11 +1,10 @@
-import { UserRepository } from '../../../usecases/ports/user-repository'
-import { UserData } from '../../../entities/client/user/user-data'
-import { MongoHelper } from './helpers/mongo-helper'
+import { UserRepository } from '@/usecases/ports/user-repository'
+import { UserData } from '@/entities/client/register/user-data'
+import { MongoHelper } from '@/external/repositories/mongodb/helpers/mongo-helper'
 
 export class MongodbUserRepository implements UserRepository {
   async findAllUsers (): Promise<any> { // Promise<UserData[]> 
      return MongoHelper.getCollection('users').find().toArray();
-    /* return await MongoHelper.getCollection('users').find().toArray() */
   }
 
   async findUserByUsername (username: string): Promise<any>{ // Promise<UserData>

@@ -1,4 +1,4 @@
-import { DomainError } from "./domain-error"
+import { DomainError } from "@/entities/validations/errors/domain-error"
 
 export class InvalidPasswordError extends Error implements DomainError {
   constructor (password: string) {
